@@ -8,21 +8,123 @@
         <![endif]-->
 
         <script src="http://cdn.leafletjs.com/leaflet-0.4/leaflet.js"></script>
+        <script src="trees.js"></script>
 
         <style type="text/css">
-            #map { height: 90% }
+            body { margin: 0 }
+            h1, #source {
+                font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+                position: absolute;
+                z-index: 100;
+                opacity: 0.6;
+                top: 0.25em;
+                left: 1.5em;
+                color: black;
+                text-shadow: white 0 0 3px;
+                margin: 0;
+                padding: 0;
+            }
+            #source {
+                left: 3.1em;
+                top: 2.75em;
+            }
+            #map {
+                height: 100%;
+                margin: 0;
+            }
         </style>
 
     </head>
     <body>
         <h1>Seattle's Heritage Trees</h1>
+        <div id="source">As recorded by the City of Seattle (<a href="https://data.seattle.gov/Community/Heritage-Trees/5979-eagq">source data</a>)</div>
         <div id="map"></div>
         <script>
-            var map = L.map('map').setView([47.630231, -122.321949], 13);
+            function esc(text) {
+                var div = document.createElement("div");
+                div.textContent = text;
+                return div.innerHTML;
+            }
+
+            var URLS = {
+                wiki: "http://en.wikipedia.org/wiki/Special:Search?go=Go&search=%1",
+                streetview: "https://maps.google.com/maps?q=%2,%1&ll=%2,%1&layer=c&cbp=13,171.84,,0,0.02&cbll=%2,%1",
+                geotools: "http://toolserver.org/~geohack/geohack.php?params=%1_%2"
+            };
+
+            function link(type, title, values) {
+                return "<a target=_new href=\""
+                    + esc(URLS[type].replace(/%(\d+)/g, function(){ return encodeURI(values[arguments[1] - 1]) }))
+                    + "\">"
+                    + esc(title) + "</a>";
+            }
+
+            function link_geotools(coords) {
+                var convert = function(dec, pos, neg) {
+                    // Based on http://toolserver.org/~geohack/
+                    var cardinal = dec > 0 ? pos : neg;
+                    var abs  = Math.abs(dec);
+                    var deg = Math.floor(abs);
+                    var min = Math.floor((abs - deg) * 60);
+                    var sec = Math.floor((abs - deg - min/60) * 3600);
+                    return [deg, min, sec, cardinal].join("_");
+                };
+                return link(
+                    "geotools", "geotools",
+                    [convert(coords[1], "N", "S"), convert(coords[0], "E", "W")]
+                );
+            }
+
+            function generatePopup(t) {
+                var html =
+                  "<b>" + link("streetview", t.properties.commonName, t.geometry.coordinates) + "</b>"
+                + " at " + esc(t.properties.address)
+                + "<br><small>"
+                + link("wiki", "wikipedia", [t.properties.commonName]) + " "
+                + link_geotools(t.geometry.coordinates)
+                + "</small>";
+                return html;
+            }
+
+            var Seattle = [47.630231, -122.321949];
+
+            var map = L.map('map').setView(Seattle, 13);
             L.tileLayer('http://{s}.tile.cloudmade.com/{key}/22677/256/{z}/{x}/{y}.png', {
-                attribution: 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2012 CloudMade',
+                attribution: 'Map data &copy; 2011 OpenStreetMap contributors',
                 key: 'ab3b91f060fc4331819cac2ca93e580d'
             }).addTo(map);
+
+            var TreeIcon = L.Icon.Default.extend({
+                options: {
+                    iconUrl: "marker-icon-green.png"
+                }
+            });
+            var treeIcon = new TreeIcon();
+            var treeLayer = L.geoJson(null, {
+                pointToLayer: function(tree, ll) {
+                    return L.marker(ll, { icon: treeIcon });
+                },
+                onEachFeature: function(tree, layer) {
+                    layer.bindPopup( generatePopup(tree) );
+                }
+            }).addTo(map);
+            for (var i = 0; i < trees.data.length; i++) {
+                var d = trees.data[i];
+                treeLayer.addData({
+                    type: "Feature",
+                    properties: {
+                        //updatedAt: new Date(d[5] * 1000),
+                        commonName: d[9],
+                        address: d[10]
+                    },
+                    geometry: {
+                        type: "Point",
+                        coordinates: [
+                            d[12], d[13]
+                        ]
+                    }
+                });
+            }
         </script>
     </body>
 </html>
