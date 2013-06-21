@@ -35,9 +35,23 @@
             html, body, #map {
                 height: 100%;
             }
-            .leaflet-popup-content {
+            #tree {
+                font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
                 font-size: 1.3em;
+                color: black;
+
+                position: absolute;
+                z-index: 100;
+                top: 3em;
+                right: 1.5em;
+                width: 28em;
+
+                background-color: white;
+                border: 1px solid grey;
+                border-radius: 0.25em;
+                padding: 0.5em;
             }
+            #tree:empty { display: none }
         </style>
 
     </head>
@@ -48,6 +62,7 @@
             <br>
             Learn more about the <a href="http://www.seattle.gov/transportation/heritagetree.htm">Heritage Tree program</a>
         </div>
+        <div id="tree"></div>
         <div id="map"></div>
         <script>
             function esc(text) {
@@ -91,14 +106,14 @@
                 );
             }
 
-            function generatePopup(t) {
+            function formatTree(t) {
                 var html =
                   "<b>" + esc(t.properties.commonName) + "</b>"
                 + " at " + esc(t.properties.address)
                 + "<br><small>"
-                + (t.properties.url ? link("infosheet", "infosheet", [t.properties.url]) + " " : "")
-                + link("streetview", "streetview", t.geometry.coordinates) + " "
-                + link("wiki", "wikipedia", [t.properties.commonName]) + " "
+                + (t.properties.url ? link("infosheet", "infosheet", [t.properties.url]) + " · " : "")
+                + link("streetview", "streetview", t.geometry.coordinates) + " · "
+                + link("wiki", "wikipedia", [t.properties.commonName]) + " · "
                 + link_geotools(t.geometry.coordinates)
                 + "</small>";
                 return html;
@@ -131,17 +146,41 @@
                     iconUrl: "marker-icon-purple.png"
                 }
             });
+            var SelectedTreeIcon = L.Icon.Default.extend({
+                options: {
+                    iconUrl: "marker-icon-red.png"
+                }
+            });
             var treeIcon = new TreeIcon();
             var notableTreeIcon = new NotableTreeIcon();
+            var selectedTreeIcon = new SelectedTreeIcon();
 
+            var previouslySelected;
+            var treeInfo = document.getElementById("tree");
             var treeLayer = L.geoJson(null, {
                 pointToLayer: function(tree, ll) {
-                    return L.marker(ll, { icon: (tree.properties.url ? notableTreeIcon : treeIcon) });
+                    return L.marker(ll, {
+                        title: tree.properties.commonName,
+                        icon: (tree.properties.url ? notableTreeIcon : treeIcon)
+                    });
                 },
                 onEachFeature: function(tree, layer) {
-                    layer.bindPopup( generatePopup(tree) );
+                    layer.on("click", function(e){
+                        if (previouslySelected)
+                            previouslySelected[0].setIcon(previouslySelected[1]);
+                        treeInfo.innerHTML = formatTree(tree);
+                        previouslySelected = [e.target, e.target.options.icon];
+                        e.target.setIcon(selectedTreeIcon);
+                    });
                 }
             }).addTo(Map);
+            Map.on("click", function(){
+                if (previouslySelected)
+                    previouslySelected[0].setIcon(previouslySelected[1]);
+                treeInfo.innerHTML = ""
+                previouslySelected = null
+            });
+
             for (var i = 0; i < trees.data.length; i++) {
                 var d = trees.data[i];
                 treeLayer.addData({
