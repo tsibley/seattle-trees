@@ -104,9 +104,9 @@
                 return html;
             }
 
-            var Seattle = [47.630231, -122.321949];
+            var Seattle = [47.64341741711686, -122.27216720581053];
 
-            var map = L.map('map').setView(Seattle, 13);
+            window.Map = L.map('map').setView(Seattle, 12);
 
             var streets = L.tileLayer(
                 'http://{s}.tile.cloudmade.com/{key}/{style}/256/{z}/{x}/{y}.png', {
@@ -118,8 +118,8 @@
                 'http://{s}.tile.stamen.com/terrain-background/{z}/{x}/{y}.jpg'
             );
 
-            streets.addTo(map);
-            L.control.layers({ "Street": streets, "Terrain": terrain }).addTo(map);
+            streets.addTo(Map);
+            L.control.layers({ "Street": streets, "Terrain": terrain }).addTo(Map);
 
             var TreeIcon = L.Icon.Default.extend({
                 options: {
@@ -141,7 +141,7 @@
                 onEachFeature: function(tree, layer) {
                     layer.bindPopup( generatePopup(tree) );
                 }
-            }).addTo(map);
+            }).addTo(Map);
             for (var i = 0; i < trees.data.length; i++) {
                 var d = trees.data[i];
                 treeLayer.addData({
