@@ -35,12 +35,19 @@
             html, body, #map {
                 height: 100%;
             }
+            .leaflet-popup-content {
+                font-size: 1.3em;
+            }
         </style>
 
     </head>
     <body>
         <h1>Seattle's Heritage Trees</h1>
-        <div id="source">As recorded by the City of Seattle (<a href="https://data.seattle.gov/Community/Heritage-Trees/5979-eagq">source data</a>)</div>
+        <div id="source">
+            As recorded by the City of Seattle (<a href="https://data.seattle.gov/Community/Heritage-Trees/5979-eagq">source data</a>)
+            <br>
+            Learn more about the <a href="http://www.seattle.gov/transportation/heritagetree.htm">Heritage Tree program</a>
+        </div>
         <div id="map"></div>
         <script>
             function esc(text) {
