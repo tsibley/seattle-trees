@@ -92,10 +92,19 @@
             var Seattle = [47.630231, -122.321949];
 
             var map = L.map('map').setView(Seattle, 13);
-            L.tileLayer('http://{s}.tile.cloudmade.com/{key}/22677/256/{z}/{x}/{y}.png', {
+
+            var streets = L.tileLayer(
+                'http://{s}.tile.cloudmade.com/{key}/{style}/256/{z}/{x}/{y}.png', {
                 attribution: 'Map data &copy; 2011 OpenStreetMap contributors',
-                key: 'ab3b91f060fc4331819cac2ca93e580d'
-            }).addTo(map);
+                key: 'ab3b91f060fc4331819cac2ca93e580d',
+                style: 22677
+            });
+            var terrain = L.tileLayer(
+                'http://{s}.tile.stamen.com/terrain-background/{z}/{x}/{y}.jpg'
+            );
+
+            streets.addTo(map);
+            L.control.layers({ "Street": streets, "Terrain": terrain }).addTo(map);
 
             var TreeIcon = L.Icon.Default.extend({
                 options: {
