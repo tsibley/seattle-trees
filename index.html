@@ -63,9 +63,13 @@
                 infosheet: "%1"
             };
 
+            function url(type, values) {
+                return URLS[type].replace(/%(\d+)/g, function(){ return encodeURI(values[arguments[1] - 1]) })
+            }
+
             function link(type, title, values) {
                 return "<a target=_new href=\""
-                    + esc(URLS[type].replace(/%(\d+)/g, function(){ return encodeURI(values[arguments[1] - 1]) }))
+                    + esc(url(type, values))
                     + "\">"
                     + esc(title) + "</a>";
             }
