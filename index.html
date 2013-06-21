@@ -116,6 +116,9 @@
                 + link("wiki", "wikipedia", [t.properties.commonName]) + " · "
                 + link_geotools(t.geometry.coordinates)
                 + "</small>";
+                if (t.properties.url) {
+                    html += "<iframe width='100%' height='75%' src='" + url("viewer", [t.properties.url]) + "'></iframe>";
+                }
                 return html;
             }
 
