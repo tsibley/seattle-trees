@@ -1,3 +1,5 @@
+// Source: https://data.seattle.gov/api/views/5979-eagq/rows.json
+//         https://data.seattle.gov/Community/Heritage-Trees/5979-eagq
 var trees = {
   "meta" : {
     "view" : {
