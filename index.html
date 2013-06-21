@@ -52,7 +52,8 @@
             var URLS = {
                 wiki: "http://en.wikipedia.org/wiki/Special:Search?go=Go&search=%1",
                 streetview: "https://maps.google.com/maps?q=%2,%1&ll=%2,%1&layer=c&cbp=13,171.84,,0,0.02&cbll=%2,%1",
-                geotools: "http://toolserver.org/~geohack/geohack.php?params=%1_%2"
+                geotools: "http://toolserver.org/~geohack/geohack.php?params=%1_%2",
+                infosheet: "%1"
             };
 
             function link(type, title, values) {
@@ -80,9 +81,11 @@
 
             function generatePopup(t) {
                 var html =
-                  "<b>" + link("streetview", t.properties.commonName, t.geometry.coordinates) + "</b>"
+                  "<b>" + esc(t.properties.commonName) + "</b>"
                 + " at " + esc(t.properties.address)
                 + "<br><small>"
+                + (t.properties.url ? link("infosheet", "infosheet", [t.properties.url]) + " " : "")
+                + link("streetview", "streetview", t.geometry.coordinates) + " "
                 + link("wiki", "wikipedia", [t.properties.commonName]) + " "
                 + link_geotools(t.geometry.coordinates)
                 + "</small>";
@@ -111,10 +114,17 @@
                     iconUrl: "marker-icon-green.png"
                 }
             });
+            var NotableTreeIcon = L.Icon.Default.extend({
+                options: {
+                    iconUrl: "marker-icon-purple.png"
+                }
+            });
             var treeIcon = new TreeIcon();
+            var notableTreeIcon = new NotableTreeIcon();
+
             var treeLayer = L.geoJson(null, {
                 pointToLayer: function(tree, ll) {
-                    return L.marker(ll, { icon: treeIcon });
+                    return L.marker(ll, { icon: (tree.properties.url ? notableTreeIcon : treeIcon) });
                 },
                 onEachFeature: function(tree, layer) {
                     layer.bindPopup( generatePopup(tree) );
@@ -127,7 +137,8 @@
                     properties: {
                         //updatedAt: new Date(d[5] * 1000),
                         commonName: d[9],
-                        address: d[10]
+                        address: d[10],
+                        url: (!d[11][0].match(/\/heritagetree\.html?$/) ? d[11][0] : null)
                     },
                     geometry: {
                         type: "Point",
