@@ -11,7 +11,9 @@ var trees = {
       "category" : "Community",
       "createdAt" : 1260481621,
       "description" : "Locations of heritage trees as designated by teh Heritage Tree Program, a cooperative program between the City of Seattle and PlantAmnesty to celebrate Seattle's Special Trees",
-      "downloadCount" : 5,
+      "downloadCount" : 777,
+      "indexUpdatedAt" : 1389322554,
+      "newBackend" : false,
       "numberOfComments" : 0,
       "oid" : 802772,
       "publicationAppendEnabled" : false,
@@ -20,10 +22,9 @@ var trees = {
       "publicationStage" : "published",
       "rowsUpdatedAt" : 1340812103,
       "rowsUpdatedBy" : "pfbu-yuv5",
-      "signed" : false,
       "tableId" : 369056,
       "totalTimesRated" : 0,
-      "viewCount" : 38,
+      "viewCount" : 1357,
       "viewLastModified" : 1281650778,
       "viewType" : "tabular",
       "columns" : [ {
@@ -516,16 +517,13 @@ var trees = {
       "owner" : {
         "id" : "pfbu-yuv5",
         "displayName" : "Department of Information Technology",
-        "emailUnsubscribed" : false,
-        "privacyControl" : "login",
         "privilegesDisabled" : false,
         "profileImageUrlLarge" : "/images/profile/3184/7575/Logo_thumb_large.gif",
         "profileImageUrlMedium" : "/images/profile/3184/7575/Logo_thumb_thumb.gif",
         "profileImageUrlSmall" : "/images/profile/3184/7575/Logo_thumb_tiny.gif",
-        "profileLastModified" : 1327602533,
         "roleName" : "administrator",
         "screenName" : "Department of Information Technology",
-        "rights" : [ "create_datasets", "edit_others_datasets", "edit_sdp", "edit_site_theme", "moderate_comments", "manage_users", "chown_datasets", "edit_nominations", "approve_nominations", "feature_items", "federations", "manage_stories", "manage_approval", "change_configurations", "view_domain", "view_others_datasets", "edit_pages", "create_pages" ]
+        "rights" : [ "create_datasets", "edit_others_datasets", "edit_sdp", "edit_site_theme", "moderate_comments", "manage_users", "chown_datasets", "edit_nominations", "approve_nominations", "feature_items", "federations", "manage_stories", "manage_approval", "change_configurations", "view_domain", "view_others_datasets", "edit_pages", "create_pages", "view_goals", "view_dashboards", "edit_goals", "edit_dashboards", "create_dashboards" ]
       },
       "query" : {
         "filterCondition" : {
@@ -548,16 +546,13 @@ var trees = {
       "tableAuthor" : {
         "id" : "pfbu-yuv5",
         "displayName" : "Department of Information Technology",
-        "emailUnsubscribed" : false,
-        "privacyControl" : "login",
         "privilegesDisabled" : false,
         "profileImageUrlLarge" : "/images/profile/3184/7575/Logo_thumb_large.gif",
         "profileImageUrlMedium" : "/images/profile/3184/7575/Logo_thumb_thumb.gif",
         "profileImageUrlSmall" : "/images/profile/3184/7575/Logo_thumb_tiny.gif",
-        "profileLastModified" : 1327602533,
         "roleName" : "administrator",
         "screenName" : "Department of Information Technology",
-        "rights" : [ "create_datasets", "edit_others_datasets", "edit_sdp", "edit_site_theme", "moderate_comments", "manage_users", "chown_datasets", "edit_nominations", "approve_nominations", "feature_items", "federations", "manage_stories", "manage_approval", "change_configurations", "view_domain", "view_others_datasets", "edit_pages", "create_pages" ]
+        "rights" : [ "create_datasets", "edit_others_datasets", "edit_sdp", "edit_site_theme", "moderate_comments", "manage_users", "chown_datasets", "edit_nominations", "approve_nominations", "feature_items", "federations", "manage_stories", "manage_approval", "change_configurations", "view_domain", "view_others_datasets", "edit_pages", "create_pages", "view_goals", "view_dashboards", "edit_goals", "edit_dashboards", "create_dashboards" ]
       },
       "tags" : [ "trees", "unique trees", "heritage trees", "special trees", "old trees" ],
       "viewFilters" : {
