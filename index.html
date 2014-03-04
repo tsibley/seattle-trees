@@ -132,17 +132,10 @@
             window.Map = L.map('map').setView(Seattle, 12);
 
             var streets = L.tileLayer(
-                'http://{s}.tile.cloudmade.com/{key}/{style}/256/{z}/{x}/{y}.png', {
-                attribution: 'Map data &copy; 2011 OpenStreetMap contributors',
-                key: 'ab3b91f060fc4331819cac2ca93e580d',
-                style: 22677
-            });
-            var terrain = L.tileLayer(
-                'http://{s}.tile.stamen.com/terrain-background/{z}/{x}/{y}.jpg'
-            );
-
-            streets.addTo(Map);
-            L.control.layers({ "Street": streets, "Terrain": terrain }).addTo(Map);
+                'http://{s}.tiles.mapbox.com/v3/{map}/{z}/{x}/{y}.png', {
+                attribution: "<a href='https://www.mapbox.com/about/maps/' target='_blank'>&copy; Mapbox &copy; OpenStreetMap</a>",
+                map: 'trs.he762e4e'
+            }).addTo(Map);
 
             var TreeIcon = L.Icon.Default.extend({
                 options: {
