@@ -11,20 +11,20 @@ var trees = {
       "category" : "Community",
       "createdAt" : 1260481621,
       "description" : "Locations of heritage trees as designated by teh Heritage Tree Program, a cooperative program between the City of Seattle and PlantAmnesty to celebrate Seattle's Special Trees",
-      "downloadCount" : 777,
-      "indexUpdatedAt" : 1389322554,
+      "downloadCount" : 884,
+      "indexUpdatedAt" : 1414470616,
       "newBackend" : false,
       "numberOfComments" : 0,
-      "oid" : 802772,
+      "oid" : 8408851,
       "publicationAppendEnabled" : false,
-      "publicationDate" : 1340812131,
+      "publicationDate" : 1405119574,
       "publicationGroup" : 215057,
       "publicationStage" : "published",
-      "rowsUpdatedAt" : 1340812103,
+      "rowsUpdatedAt" : 1370642145,
       "rowsUpdatedBy" : "pfbu-yuv5",
-      "tableId" : 369056,
+      "tableId" : 905463,
       "totalTimesRated" : 0,
-      "viewCount" : 1357,
+      "viewCount" : 1649,
       "viewLastModified" : 1281650778,
       "viewType" : "tabular",
       "columns" : [ {
@@ -100,7 +100,7 @@ var trees = {
         "format" : {
         }
       }, {
-        "id" : 11875953,
+        "id" : 156899795,
         "name" : "City Feature",
         "dataTypeName" : "text",
         "description" : "Type of City of Seattle feature, such as traffic cameras, parks, playfields, Neighborhood Service Centers, etc. ",
@@ -122,7 +122,7 @@ var trees = {
         "format" : {
         }
       }, {
-        "id" : 11875954,
+        "id" : 156899796,
         "name" : "Common Name",
         "dataTypeName" : "text",
         "description" : "This is the commonly referred name of the feature. It may be a name of a building, a park, or a location",
@@ -180,7 +180,7 @@ var trees = {
         "format" : {
         }
       }, {
-        "id" : 11875955,
+        "id" : 156899797,
         "name" : "Address",
         "dataTypeName" : "text",
         "description" : "Address is the most specific location information for a feature. It ranges from a building on a campus (like Cunningham Hall on the University of Washington campus, to an intersection, to a specific street address.",
@@ -247,7 +247,7 @@ var trees = {
         "format" : {
         }
       }, {
-        "id" : 11875956,
+        "id" : 156899798,
         "name" : "Website",
         "dataTypeName" : "url",
         "description" : "This is the most recent known correct website address for the given feature. ",
@@ -371,7 +371,7 @@ var trees = {
         },
         "subColumnTypes" : [ "url", "description" ]
       }, {
-        "id" : 11875957,
+        "id" : 156899799,
         "name" : "Longitude",
         "dataTypeName" : "number",
         "description" : "This is the longitude value. Lines of longitude run perpendicular to lines of latitude, and all pass through both poles.",
@@ -440,7 +440,7 @@ var trees = {
         "format" : {
         }
       }, {
-        "id" : 11875958,
+        "id" : 156899800,
         "name" : "Latitude",
         "dataTypeName" : "number",
         "description" : "This is the latitude value. Lines of latitude are parallel to the equator.",
@@ -533,7 +533,7 @@ var trees = {
             "type" : "operator",
             "value" : "EQUALS",
             "children" : [ {
-              "columnId" : 11875953,
+              "columnId" : 156899795,
               "type" : "column"
             }, {
               "type" : "literal",
@@ -562,7 +562,7 @@ var trees = {
           "type" : "operator",
           "value" : "EQUALS",
           "children" : [ {
-            "columnId" : 11875953,
+            "columnId" : 156899795,
             "type" : "column"
           }, {
             "type" : "literal",
