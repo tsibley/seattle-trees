@@ -62,6 +62,7 @@
             As recorded by the City of Seattle (<a href="https://data.seattle.gov/Community/Heritage-Trees/5979-eagq">source data</a>)
             <br>
             <small>
+            <div id="last-updated">Data last updated by the City on </div>
             Learn more about the <a href="http://www.seattle.gov/transportation/heritagetree.htm">Heritage Tree program</a>
             <br>
             A mini-project of <a href="http://tsibley.net">Thomas Sibley</a>
@@ -72,6 +73,10 @@
         <div id="tree"></div>
         <div id="map"></div>
         <script>
+            var updated = new Date(trees.meta.view.rowsUpdatedAt * 1000);
+            document.getElementById("last-updated").textContent
+                += updated.toDateString();
+
             function esc(text) {
                 var div = document.createElement("div");
                 div.textContent = text;
