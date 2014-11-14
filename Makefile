@@ -1,4 +1,5 @@
 publish:
+	git push
 	ssh tsibley.net 'cd www/trees/seattle/ && git pull'
 
 trees.js:
